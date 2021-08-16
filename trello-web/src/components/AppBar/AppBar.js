@@ -1,12 +1,12 @@
-import React from 'react';
+import React from 'react'
 import './AppBar.scss'
 
 function AppBar() {
     return (
-        <div className="navbar navbar-app">
+        <div className='navbar navbar-app'>
             App Bar
         </div>
-    );
+    )
 }
 
-export default AppBar;
+export default AppBar

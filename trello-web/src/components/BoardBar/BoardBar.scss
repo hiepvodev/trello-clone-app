@@ -2,6 +2,7 @@
 
 $board-bg-color: #0079bf;
 
-navbar-board {
+.navbar-board {
     background-color: $board-bg-color;
+    height: $navbar-board-height;
   }

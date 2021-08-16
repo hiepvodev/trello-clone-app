@@ -1,19 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap');
 @import './setting.scss';
 
 $board-bg-color: #0079bf;
 
 body {
   margin: 0;
-  font-family: "Source Sans Pro", sans;
+  font-family: 'Source Sans Pro', sans;
   font-size: 14px;
   line-height: 1.3rem;
 }
 
 .trello {
   height: 100vh;
-  display: grid;
-  grid-template-rows: 40px 50px 1fr;
+  overflow-y: hidden;
   line-height: 1.3rem;
   background-color: $board-bg-color;
   .navbar {
