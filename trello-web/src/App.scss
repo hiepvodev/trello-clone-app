@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap');
 @import './setting.scss';
+@import "~bootstrap/scss/bootstrap";
 
 $board-bg-color: #0079bf;
 
@@ -9,6 +10,23 @@ body {
   font-size: 14px;
   line-height: 1.3rem;
 }
+
+textarea:focus, 
+textarea.form-control:focus, 
+input.form-control:focus, 
+input[type=text]:focus, 
+input[type=password]:focus, 
+input[type=email]:focus, 
+input[type=number]:focus, 
+[type=text].form-control:focus, 
+[type=password].form-control:focus, 
+[type=email].form-control:focus, 
+[type=tel].form-control:focus, 
+[contenteditable].form-control:focus {
+  box-shadow: none;
+}
+
+button:focus {outline:0!important;box-shadow: none!important;}
 
 .trello {
   height: 100vh;
@@ -23,6 +41,10 @@ body {
   .icon {
     font-size: 14px;
     margin-right: 3px;
+  }
+  .trello-container{
+    margin: 0 15px;
+    padding: 0px;
   }
 }
 

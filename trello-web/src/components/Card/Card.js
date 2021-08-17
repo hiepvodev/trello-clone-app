@@ -9,7 +9,7 @@ function Card(props) {
       {card.cover &&
       <img
         src={card.cover}
-        alt='hiepDev' 
+        alt='hiepDev'
         draggable="false"
       />}
       {card.title}

@@ -14,4 +14,4 @@ export const applyDrag = (arr, dragResult) => {
   }
 
   return result
-};
+}
