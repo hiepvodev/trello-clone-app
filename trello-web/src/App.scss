@@ -1,32 +1,37 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap');
-@import './setting.scss';
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap");
+@import "./setting.scss";
 @import "~bootstrap/scss/bootstrap";
 
 $board-bg-color: #0079bf;
 
 body {
   margin: 0;
-  font-family: 'Source Sans Pro', sans;
+  font-family: "Source Sans Pro", sans;
   font-size: 14px;
   line-height: 1.3rem;
 }
 
-textarea:focus, 
-textarea.form-control:focus, 
-input.form-control:focus, 
-input[type=text]:focus, 
-input[type=password]:focus, 
-input[type=email]:focus, 
-input[type=number]:focus, 
-[type=text].form-control:focus, 
-[type=password].form-control:focus, 
-[type=email].form-control:focus, 
-[type=tel].form-control:focus, 
+textarea:focus,
+textarea.form-control:focus,
+input.form-control:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+[type="text"].form-control:focus,
+[type="password"].form-control:focus,
+[type="email"].form-control:focus,
+[type="tel"].form-control:focus,
 [contenteditable].form-control:focus {
   box-shadow: none;
+  border: 1px solid $input-border-color;
 }
 
-button:focus {outline:0!important;box-shadow: none!important;}
+button:focus {
+  outline: 0 !important;
+  box-shadow: none !important;
+  border: 1px solid $input-border-color;
+}
 
 .trello {
   height: 100vh;
@@ -42,21 +47,29 @@ button:focus {outline:0!important;box-shadow: none!important;}
     font-size: 14px;
     margin-right: 3px;
   }
-  .trello-container{
+  .trello-container {
     margin: 0 15px;
     padding: 0px;
   }
 
-  .trello-content-ediable{
+  .trello-content-ediable {
     background-color: inherit;
     border: none;
     font-size: inherit;
     font-weight: inherit;
     cursor: pointer;
-    &:focus{
+    &:focus {
       background-color: #fff;
-      border: 1px solid $input-border-color;
+    }
+  }
+
+  .common-btn-cancle {
+    background-color: inherit;
+    border: none;
+    color: rgb(118, 118, 118);
+    font-size: 18px;
+    &:hover {
+      color: #333;
     }
   }
 }
-
