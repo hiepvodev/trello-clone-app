@@ -12,6 +12,9 @@ function BoardContent() {
   const [board, setBoard] = useState({})
   const [columns, setColumns] = useState([])
   const [isOpenNewColumn, setIsOpenNewColumn] = useState(false)
+  const onToogleNewColumn = () => {
+    setIsOpenNewColumn(!isOpenNewColumn)
+  }
 
   const newColumnInputRef = useRef(null)
 
@@ -72,9 +75,6 @@ function BoardContent() {
     onToogleNewColumn()
   }
 
-  const onToogleNewColumn = () => {
-    setIsOpenNewColumn(!isOpenNewColumn)
-  }
 
   const onColumnDrop = (dropResult) => {
     let newColumns = [...columns]
@@ -135,7 +135,11 @@ function BoardContent() {
       >
         {columns.map((column, index) => (
           <Draggable key={index}>
-            <Column column={column} onCardDrop={onCardDrop} onUpdateColumn={onUpdateColumn}/>
+            <Column
+              column={column}
+              onCardDrop={onCardDrop}
+              onUpdateColumn={onUpdateColumn}
+              onAddNewCardToColumn={onUpdateColumn}/>
           </Draggable>
         ))}
       </Container>
@@ -165,7 +169,7 @@ function BoardContent() {
                 />
                 <div className="mb-2">
                   <Button variant="success" className="btn-add-title" onClick={addNewColumn}>Add Column</Button>
-                  <Button className="btn-cancle" onClick={onToogleNewColumn}>
+                  <Button className="common-btn-cancle" onClick={onToogleNewColumn}>
                     <i className="fa fa-times" aria-hidden="true"></i>
                   </Button>
                 </div>
