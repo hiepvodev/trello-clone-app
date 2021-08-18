@@ -2,11 +2,11 @@
 
 $board-bg-color: #0079bf;
 
-$column-header-height: 36px;
-$column-footer-height: 36px;
-
+$column-header-height: 40px;
+$column-footer-height: 40px;
 $card-border-radius: 3px;
 $common-element-bg : rgba(255,255,255,.24);
+$column-bg-color: rgba(136,136,136,.24);
 $column-height: calc(#{$board-content-height} - #{$gap * 2});
 
 .column {
@@ -30,6 +30,44 @@ $column-height: calc(#{$board-content-height} - #{$gap * 2});
     font-weight: bold;
     border-top-left-radius: $column-border-radius;
     border-top-right-radius: $column-border-radius;
+    display: flex;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    .column-title {
+      flex: 90%;
+    }
+    .column-dropdown-action{
+      flex: 10%;
+      .dropdown-btn{
+        position: absolute;
+        padding: 0 $gap;
+        font-size: 16px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        background-color: inherit;
+        border: none;
+        color: $app-main-text-color;
+        &:after{
+          content: '...';
+          border: none;
+        }
+        &:hover{
+          background-color: darken($column-bg-color,10);
+          border-color: darken($column-bg-color,10);
+        }
+      }
+      .dropdown-menu{
+        padding: 0;
+        min-width: 200px;
+        a.dropdown-item{
+          padding: 0.1rem 1rem;
+          font-size: 14px;
+          &:not(:last-child){
+            border-bottom: 1px solid $column-bg-color;
+          }
+        }
+      }
+    }
   }
   footer {
     padding-left: 15px;
