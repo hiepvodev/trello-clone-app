@@ -11,13 +11,14 @@
     "build": "npm run clean && npm run build-babel",
     "production": "npm run build && node ./build/src/server.js",
     "dev": "nodemon --exec ./node_modules/.bin/babel-node ./src/server.js",
-    "kill-port": "kill-port 3000"
+    "kill-port": "kill-port 8080"
   },
   "keywords": [],
   "author": "hiepDev",
   "license": "ISC",
   "dependencies": {
     "@babel/runtime": "^7.15.3",
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "joi": "^17.4.2",
