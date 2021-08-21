@@ -7,4 +7,7 @@ router.route('/')
   // .get((req, res) => console.log('Get boards'))
   .post(BoardValidation.createNew, BoardController.createNew)
 
+router.route('/:id')
+  .get(BoardController.getFullBoard)
+
 export const BoardRoutes = router
