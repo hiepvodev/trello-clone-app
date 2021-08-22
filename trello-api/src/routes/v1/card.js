@@ -4,8 +4,10 @@ import { CardValidation } from '@/validations/card'
 const router = express.Router()
 
 router.route('/')
-  // .get((req, res) => console.log('Get boards'))
-  .post(CardController.createNew, CardValidation.createNew)
+  .post(CardValidation.createNew, CardController.createNew)
+
+router.route('/:id')
+  .put(CardValidation.update, CardController.update)
 
 
 export const CardRoutes = router
