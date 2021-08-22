@@ -7,6 +7,7 @@ import { mapOrder } from 'utilities/sorts'
 import { applyDrag } from 'utilities/drapDrop'
 import { Container as BContainer, Row, Col, Form, Button } from 'react-bootstrap'
 import boardApi from 'api/boardApi'
+import columnApi from 'api/columnApi'
 
 function BoardContent() {
   const [board, setBoard] = useState({})
@@ -25,7 +26,8 @@ function BoardContent() {
     boardApi.fetchBoardDetails(boardId).then(board => {
       setBoard(board)
       //sort column
-      setColumns(mapOrder(board.columns, board.columnOrder, 'id'))
+      const activeColumns = board.columns.filter(c => c._destroy === false)
+      setColumns(mapOrder(activeColumns, board.columnOrder, 'id'))
     })
   }, [])
 
@@ -51,25 +53,24 @@ function BoardContent() {
     }
 
     const newColumnToAdd = {
-      id: Math.random().toString(36).substr(2, 5),
       boardId: board._id,
-      title: newColumnTitle.trim(),
-      cardOrder: [],
-      cards: []
+      title: newColumnTitle.trim()
     }
 
-    let newColumns = [...columns]
-    newColumns.push(newColumnToAdd)
+    columnApi.createNewColumn(newColumnToAdd).then(column => {
+      let newColumns = [...columns]
+      newColumns.push(column)
 
-    let newBoard = { ...board }
-    newBoard.columnOrder = newColumns.map(c => c._id)
-    newBoard.columns = newColumns
+      let newBoard = { ...board }
+      newBoard.columnOrder = newColumns.map(c => c._id)
+      newBoard.columns = newColumns
 
-    setColumns(newColumns)
-    setBoard(newBoard)
+      setColumns(newColumns)
+      setBoard(newBoard)
 
-    setNewColumnTitle('')
-    onToogleNewColumn()
+      setNewColumnTitle('')
+      onToogleNewColumn()
+    })
   }
 
 

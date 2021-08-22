@@ -1,9 +1,9 @@
-import { cardModel } from '@/models/card'
+import { CardModel } from '@/models/card'
 import { ColumnModel } from '@/models/column'
 
 const createNew = async (data) => {
   try {
-    const newCard = await cardModel.createNew(data)
+    const newCard = await CardModel.createNew(data)
     //update columnOrder array in board collection
     await ColumnModel.pushCardOrder(newCard.columnId.toString(), newCard._id.toString())
     return newCard
@@ -18,7 +18,7 @@ const update = async (id, data) => {
       ...data,
       updatedAt: Date.now()
     }
-    const result = await cardModel.update(id, updateData)
+    const result = await CardModel.update(id, updateData)
     return result
   } catch (error) {
     throw new Error(error)

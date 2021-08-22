@@ -8,6 +8,8 @@ import ConfirmModal from 'components/Common/ConfirmModal'
 import { MODAL_ACTION_CONFIRM } from 'utilities/constants'
 import { handleKeyEnterPress, selectAllInlineText } from 'utilities/contentEditable'
 import { cloneDeep } from 'lodash'
+import cardApi from 'api/cardApi'
+import columnApi from 'api/columnApi'
 
 function Column(props) {
   const { column, onCardDrop, onUpdateColumn, onAddNewCardToColumn } = props
@@ -46,42 +48,56 @@ function Column(props) {
     }
 
     const newCardToAdd = {
-      id: Math.random().toString(36).substr(2, 5),
       boardId: column.boardId,
       columnId: column._id,
-      title: newCardTitle.trim(),
-      cover: null
+      title: newCardTitle.trim()
+      // cover: null
     }
 
-    let newColumn = cloneDeep(column)
-    newColumn.cards.push(newCardToAdd)
-    newColumn.cardOrder.push(newCardToAdd._id)
+    cardApi.createNewCard(newCardToAdd).then(card => {
+      let newColumn = cloneDeep(column)
+      newColumn.cards.push(card)
+      newColumn.cardOrder.push(card._id)
 
-    onAddNewCardToColumn(newColumn)
+      onAddNewCardToColumn(newColumn)
 
-    setNewCardTitle('')
-    onToogleNewCard()
+      setNewCardTitle('')
+      onToogleNewCard()
+    })
   }
 
-
+  //remove column
   const onConfirmModalAction = (type) => {
     if (type === MODAL_ACTION_CONFIRM) {
       const newColumn = {
         ...column,
         _destroy: true
       }
-      onUpdateColumn(newColumn)
+      //Call api update column
+      columnApi.updateColumn(newColumn._id, newColumn).then(updatedColumn => {
+        let newUpdatedColumn = {
+          ...updatedColumn,
+          _destroy: true
+        }
+        onUpdateColumn(newUpdatedColumn)
+      })
     }
     toggleShowConfirmModal()
   }
 
-
+  //update new column
   const handleColumnTitleBlur = () => {
-    const newColumn = {
-      ...column,
-      title: columnTitle
+    if (columnTitle !== column.title) {
+      const newColumn = {
+        ...column,
+        title: columnTitle
+      }
+      //Call api update column
+      columnApi.updateColumn(newColumn._id, newColumn).then(updatedColumn => {
+        updatedColumn.cards = newColumn.cards
+        onUpdateColumn(updatedColumn)
+      })
     }
-    onUpdateColumn(newColumn)
   }
 
   return (
