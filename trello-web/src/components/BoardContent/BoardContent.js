@@ -2,12 +2,13 @@ import Column from 'components/Column/Column'
 import React, { useState, useEffect, useRef } from 'react'
 import { Container, Draggable } from 'react-smooth-dnd'
 import './BoardContent.scss'
-import { isEmpty } from 'lodash'
+import { isEmpty, cloneDeep } from 'lodash'
 import { mapOrder } from 'utilities/sorts'
 import { applyDrag } from 'utilities/drapDrop'
 import { Container as BContainer, Row, Col, Form, Button } from 'react-bootstrap'
 import boardApi from 'api/boardApi'
 import columnApi from 'api/columnApi'
+import cardApi from 'api/cardApi'
 
 function BoardContent() {
   const [board, setBoard] = useState({})
@@ -27,7 +28,7 @@ function BoardContent() {
       setBoard(board)
       //sort column
       const activeColumns = board.columns.filter(c => c._destroy === false)
-      setColumns(mapOrder(activeColumns, board.columnOrder, 'id'))
+      setColumns(mapOrder(activeColumns, board.columnOrder, '_id'))
     })
   }, [])
 
@@ -75,26 +76,58 @@ function BoardContent() {
 
 
   const onColumnDrop = (dropResult) => {
-    let newColumns = [...columns]
+    let newColumns = cloneDeep(columns)
     newColumns = applyDrag(newColumns, dropResult)
 
-    let newBoard = { ...board }
+    let newBoard = cloneDeep(board)
     newBoard.columnOrder = newColumns.map(c => c._id)
     newBoard.columns = newColumns
-
+    //call api update columnOrder in board
     setColumns(newColumns)
     setBoard(newBoard)
+    boardApi.updateBoard(newBoard._id, newBoard).catch(error => {
+      //handle error
+      setColumns(columns)
+      setBoard(board)
+    })
+
   }
 
   const onCardDrop = (columnId, dropResult) => {
     if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
-      let newColumns = [...columns]
+      let newColumns = cloneDeep(columns)
 
       let currentColumn = newColumns.find(c => c._id === columnId)
       currentColumn.cards = applyDrag(currentColumn.cards, dropResult)
       currentColumn.cardOrder = currentColumn.cards.map(i => i._id)
-
+      console.log(dropResult);
       setColumns(newColumns)
+      if (dropResult.removedIndex !== null && dropResult.addedIndex !== null) {
+        /**
+         * Action: move card inside one column
+         * 1 - Call api update cardOrder in current column
+         */
+        if (dropResult.removedIndex === dropResult.addedIndex) return
+        columnApi.updateColumn(currentColumn._id, currentColumn).catch(() => {
+          setColumns(columns)
+        })
+
+      } else {
+        /**
+         * Action: move card between two columns
+         */
+
+        //  1 - Call api update cardOrder in current column
+        if (dropResult.addedIndex !== null) {
+          columnApi.updateColumn(currentColumn._id, currentColumn).catch(() => {
+            setColumns(columns)
+          })
+          let currentCard = cloneDeep(dropResult.payload)
+          currentCard.columnId = currentColumn._id
+          // 2 - Call api update columnId in current card
+          cardApi.updatedCard(currentCard._id, currentCard)
+        }
+      }
     }
   }
 
@@ -137,7 +170,7 @@ function BoardContent() {
               column={column}
               onCardDrop={onCardDrop}
               onUpdateColumn={onUpdateColumn}
-              onAddNewCardToColumn={onUpdateColumn}/>
+              onAddNewCardToColumn={onUpdateColumn} />
           </Draggable>
         ))}
       </Container>
