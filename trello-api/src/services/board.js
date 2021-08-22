@@ -23,7 +23,6 @@ const getFullBoard = async (id) => {
     //sort column by collumn order or sort cards by  cardOrder - reactjs handle
     //delete cards array
     delete board.cards
-    console.log(board)
     return board
   } catch (error) {
     throw new Error(error)
