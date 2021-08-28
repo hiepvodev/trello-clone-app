@@ -5,9 +5,13 @@ $common-element-bg : rgba(255,255,255,.24);
 $app-main-text-color: #333;
 $list-bg-color: #ebecf0;
 $input-border-color: #0079bf; 
+$white-text: #ffffff;
+$white-blur-bg: #66a4c8;
+$white-hover-bg: #3385b6;
+
 
 //Height: appbar + boardbar + boardContent =  100vh
-$navbar-height: 5vh;
-$navbar-board-height: 6vh;
+$navbar-height: 50px; //5vh
+$navbar-board-height:60px; //6vh
 $board-content-height: 88vh;
 $column-border-radius: 5px;

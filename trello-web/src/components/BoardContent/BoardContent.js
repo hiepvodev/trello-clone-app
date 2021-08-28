@@ -23,7 +23,7 @@ function BoardContent() {
   const [newColumnTitle, setNewColumnTitle] = useState('')
 
   useEffect(() => {
-    const boardId = '611fe5a77539766a0f6d2022'
+    const boardId = '612a471b4df0900ead11c420' //demo
     boardApi.fetchBoardDetails(boardId).then(board => {
       setBoard(board)
       //sort column

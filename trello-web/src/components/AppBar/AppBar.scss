@@ -2,8 +2,92 @@
 
 $appbar-bg-color: #0067a3;
 
-
 .navbar-app {
     background-color: $appbar-bg-color;
     height: $navbar-height;
+    .row{
+        width: 100%;
+        color: $white-text;
+        font-size: 18px;
+        .left-actions{
+            display: flex;
+            .item {
+                min-width: 36px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                background-color: $white-blur-bg;
+                border-radius: 6px;
+                transition: all .25s;
+                &:not(:last-child){
+                    margin-right: 6px;
+                }
+                &:hover{
+                    background-color: $white-hover-bg;
+                }
+                &.search {
+                    input {
+                        background-color: inherit;
+                        color: $white-text;
+                        border: none;
+                        &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+                            color: $white-text;
+                            opacity: 1; /* Firefox */
+                        }
+                        
+                        &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+                            color: $white-text;
+                        }
+                        
+                        &::-ms-input-placeholder { /* Microsoft Edge */
+                            color: $white-text;
+                        }
+                    }
+                    #search-icon {
+                        background-color: inherit;
+                        border: none;
+                        i {
+                            color: $white-text;
+                        }
+                    }
+                }
+            }
+        }
+        .center-action{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            cursor: pointer;
+            color: darken($white-text, 15%);
+            &:hover{
+                color: $white-text;
+            }
+        }
+        .right-actions {
+            display: flex;
+            justify-content: flex-end;
+            height: 100%;
+            .item{
+                min-width: 36px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                background-color: $white-blur-bg;
+                border-radius: 6px;
+                transition: all .25s;
+                &:not(:last-child){
+                    margin-right: 6px;
+                }
+                &:hover{
+                    background-color: $white-hover-bg;
+                }
+                &.create-new {
+                    width: 100px;
+                }
+            }
+        }
+    }
 }
