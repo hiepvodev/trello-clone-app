@@ -3,6 +3,79 @@
 $board-bg-color: #0079bf;
 
 .navbar-board {
-    background-color: $board-bg-color;
-    height: $navbar-board-height;
-  }
+  background-color: $board-bg-color;
+  height: $navbar-board-height;
+  .row{
+    width: 100%;
+    color: $white-text;
+    font-size: 18px;
+    .left-actions{
+        display: flex;
+        height: 100%;
+        .board-divider{
+          border-left: 1px solid #ffffff3d;
+          float: left;
+          height: 16px;
+          margin: 8px 8px 12px 4px;
+        }
+        .item {
+            padding: 0px 5px;
+            min-width: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background-color: $white-blur-bg;
+            border-radius: 6px;
+            transition: all .25s;
+            &:not(:last-child){
+                margin-right: 6px;
+            }
+            &:hover{
+                background-color: $white-hover-bg;
+            }
+            &.boards {
+              span {
+                padding: 0px 8px;
+              }
+              .fa-chevron-down{
+                font-size: 13px;
+              }
+            }
+            &.board-name, &.group-users {
+              background-color: inherit;
+              .sb-avatar{
+                margin-right: -3px;
+              }
+            }
+        }
+    }
+    .right-actions {
+        display: flex;
+        justify-content: flex-end;
+        height: 100%;
+        .item{
+            min-width: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background-color: $white-blur-bg;
+            border-radius: 6px;
+            transition: all .25s;
+            &:not(:last-child){
+                margin-right: 6px;
+            }
+            &:hover{
+                background-color: $white-hover-bg;
+            }
+            &.show-menu {
+              width: 130px;
+              span{
+                padding-left: 5px;
+              }
+            }
+        }
+    }
+}
+}

@@ -12,7 +12,6 @@ const createNew = async (data) => {
 const getFullBoard = async (id) => {
   try {
     const board = await BoardModel.getFullBoard(id)
-
     if (!board || !board.columns) {
       throw new Error('Board not found!')
     }
