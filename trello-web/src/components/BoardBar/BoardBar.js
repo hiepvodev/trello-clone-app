@@ -15,7 +15,7 @@ function BoardBar() {
     <div className='navbar navbar-board'>
       <BContainer fluid>
         <Row>
-          <Col xs={12} sm={6}>
+          <Col xs={12} sm={10}>
             <div className="left-actions">
               <div className="item boards">
                 <i className="fa fa-tasks" aria-hidden="true"></i>
@@ -40,7 +40,7 @@ function BoardBar() {
               <div className="item add-user">Invite</div>
             </div>
           </Col>
-          <Col xs={12} sm={6}>
+          <Col xs={12} sm={2}>
             <div className="right-actions">
               <div className="item show-menu"><i className="fa fa-ellipsis-h" aria-hidden="true"></i>  <span>Show menu</span></div>
             </div>

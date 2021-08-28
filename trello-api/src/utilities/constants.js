@@ -6,4 +6,7 @@ export const HttpStatusCode = {
   INTERNAL_SERVER: 500
 }
 
-export const WHITELIST_DOMAIN = ['http://localhost:3000', 'http://localhost:3001']
+export const WHITELIST_DOMAIN = [
+  'http://localhost:3000',
+  'https://trello-hiepdev.web.app'
+]
