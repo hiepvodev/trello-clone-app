@@ -11,7 +11,8 @@
     "build": "npm run clean && npm run build-babel",
     "production": "npm run build && node ./build/src/server.js",
     "dev": "nodemon --exec ./node_modules/.bin/babel-node ./src/server.js",
-    "kill-port": "kill-port 8080"
+    "kill-port": "kill-port 8080",
+    "start": "node ./build/src/server.js"
   },
   "keywords": [],
   "author": "hiepDev",

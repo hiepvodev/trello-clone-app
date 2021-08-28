@@ -30,7 +30,11 @@ const bootServer = () => {
   //routes api v1
   app.use('/v1', apiV1)
   //
-  app.listen(port, hostName, () => {
-    console.log(`Trello clone app listening at http://${hostName}:${port}`)
+  // app.listen(port, hostName, () => {
+  //   console.log(`Trello clone app listening at http://${hostName}:${port}`)
+  // })
+  //Support heorku deploy
+  app.listen(process.env.PORT, () => {
+    console.log(`Trello clone app listening at ${process.env.PORT}`)
   })
 }
